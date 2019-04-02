@@ -51,6 +51,7 @@ app.get("/redirect", (req, res) => {
 	);
 });
 
+// Auth with code already
 app.get("/authWithCode", (req, res) => {
 	const code = req.url.match(/code=([\w\d-_.]+)/)[1];
 	const base64Token = `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`;

@@ -52,16 +52,15 @@ app.get("/redirect", (req, res) => {
 });
 
 // Auth with code already
-app.get("/authWithCode", (req, res) => {
+app.post("/authWithCode", (req, res) => {
 	console.log("REQUEST INCOMING");
-	console.log("REQUEST: ");
-	console.log(req);
 	console.log("PARAMS: ", req.params);
 	console.log("QUERY: ", req.query);
 	console.log("CODE:", req.query.code);
 	const code = req.query.code;
 	// const code = req.url.match(/code=([\w\d-_.]+)/)[1];
 	const base64Token = `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`;
+	console.log("Base64Token: ", base64Token);
 	if (code) {
 		request(
 			{

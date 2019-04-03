@@ -80,6 +80,8 @@ app.post("/authWithCode", (req, res) => {
 				res.send(`${qs.stringify(body)}`);
 			}
 		);
+	} else {
+		res.send("That didnt work. No code");
 	}
 });
 

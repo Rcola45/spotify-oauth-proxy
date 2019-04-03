@@ -54,6 +54,8 @@ app.get("/redirect", (req, res) => {
 // Auth with code already
 app.get("/authWithCode", (req, res) => {
 	console.log("REQUEST INCOMING");
+	console.log("PARAMS: ", req.params);
+	console.log("QUERY: ", req.query);
 	console.log("CODE:", req.query.code);
 	const code = req.query.code;
 	// const code = req.url.match(/code=([\w\d-_.]+)/)[1];

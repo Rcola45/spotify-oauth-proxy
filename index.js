@@ -54,11 +54,11 @@ app.get("/redirect", (req, res) => {
 // Auth with code already
 app.get("/authWithCode", (req, res) => {
 	console.log("REQUEST INCOMING");
-	console.log("QUERY: ", req.query);
-	console.log("PARAMS: ", req.params);
-	console.log("BODY: ", req.body);
-	console.log("URL: ", req.url);
-	const code = req.url.match(/code=([\w\d-_.]+)/)[1];
+	// console.log("QUERY: ", req.query);
+	// console.log("PARAMS: ", req.params);
+	// console.log("BODY: ", req.body);
+	// console.log("URL: ", req.url);
+	const code = req.query.code;
 	const base64Token = `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`;
 	console.log("Base64Token: ", base64Token);
 	if (code) {
@@ -69,7 +69,8 @@ app.get("/authWithCode", (req, res) => {
 				form: {
 					grant_type: "authorization_code",
 					code: code,
-					redirect_uri: `${process.env.SERVER_URL}/authWithCode`
+					redirect_uri:
+						"https://lkicoiogfdfdbpbpmdekaibchkomngik.chromiumapp.org/spotify"
 				},
 				json: true,
 				headers: {

@@ -54,6 +54,7 @@ app.get("/redirect", (req, res) => {
 // Auth with code already
 app.post("/authWithCode", (req, res) => {
 	console.log("REQUEST INCOMING");
+	console.log(req);
 	console.log("PARAMS: ", req.params);
 	console.log("QUERY: ", req.query);
 	console.log("CODE:", req.query.code);

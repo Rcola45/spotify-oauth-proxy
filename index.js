@@ -54,30 +54,34 @@ app.get("/redirect", (req, res) => {
 // Auth with code already
 app.get("/authWithCode", (req, res) => {
 	console.log("REQUEST INCOMING");
+	console.log("REQUEST: ");
+	console.log(req);
 	console.log("PARAMS: ", req.params);
 	console.log("QUERY: ", req.query);
 	console.log("CODE:", req.query.code);
 	const code = req.query.code;
 	// const code = req.url.match(/code=([\w\d-_.]+)/)[1];
 	const base64Token = `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`;
-	request(
-		{
-			url: "https://accounts.spotify.com/api/token",
-			method: "POST",
-			form: {
-				grant_type: "authorization_code",
-				code: code,
-				redirect_uri: `${process.env.SERVER_URL}/authWithCode`
+	if (code) {
+		request(
+			{
+				url: "https://accounts.spotify.com/api/token",
+				method: "POST",
+				form: {
+					grant_type: "authorization_code",
+					code: code,
+					redirect_uri: `${process.env.SERVER_URL}/authWithCode`
+				},
+				json: true,
+				headers: {
+					Authorization: `Basic ${new Buffer(base64Token).toString("base64")}`
+				}
 			},
-			json: true,
-			headers: {
-				Authorization: `Basic ${new Buffer(base64Token).toString("base64")}`
+			(err, response, body) => {
+				res.send(`${qs.stringify(body)}`);
 			}
-		},
-		(err, response, body) => {
-			res.send(`${qs.stringify(body)}`);
-		}
-	);
+		);
+	}
 });
 
 app.get("/refresh", (req, res) => {

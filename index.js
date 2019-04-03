@@ -5,6 +5,7 @@ const qs = require("querystring");
 const app = express();
 
 app.use(express.static("."));
+app.use(express.urlencoded());
 
 app.use(function(req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
@@ -58,6 +59,7 @@ app.post("/authWithCode", (req, res) => {
 	console.log("PARAMS: ", req.params);
 	console.log("QUERY: ", req.query);
 	console.log("CODE:", req.query.code);
+	console.log("BODY: ", req.body);
 	const code = req.query.code;
 	// const code = req.url.match(/code=([\w\d-_.]+)/)[1];
 	const base64Token = `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`;

@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
 app.get("/auth", (req, res) => {
 	redirectUrl = req.query.redirect_url;
 	scopes = "streaming user-read-birthdate user-read-email user-read-private";
-	res.send(
+	res.redirect(
 		"https://accounts.spotify.com/authorize?" +
 			qs.stringify({
 				response_type: "code",

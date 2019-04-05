@@ -18,13 +18,14 @@ app.use(function(req, res, next) {
 });
 
 app.get("/auth", (req, res) => {
+	redirectUrl = req.query.redirect_url;
 	scopes = "streaming user-read-birthdate user-read-email user-read-private";
 	res.send(
 		"https://accounts.spotify.com/authorize?" +
 			qs.stringify({
 				response_type: "code",
 				client_id: process.env.CLIENT_ID,
-				redirect_uri: `${process.env.SERVER_URL}/redirect`,
+				redirect_uri: redirectUrl,
 				scopes: encodeURIComponent(scopes)
 			})
 	);

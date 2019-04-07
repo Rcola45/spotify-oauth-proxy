@@ -103,12 +103,14 @@ app.get("/refresh", (req, res) => {
 
 app.get("/transferToPlayer", (req, res) => {
 	const access_token = req.query.token;
-	const device_ids_body = req.query.device_id
+	const device_ids_body = req.query.device_id;
+	console.log("Token: ", access_token);
+	console.log("Device_id: ", device_ids_body);
 	request(
 		{
 			url: "https://api.spotify.com/v1/me/player",
 			method: "put",
-			form: {
+			body: {
 				device_ids: [device_ids_body]
 			},
 			headers: {

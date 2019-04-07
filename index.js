@@ -110,9 +110,7 @@ app.get("/transferToPlayer", (req, res) => {
 		{
 			url: "https://api.spotify.com/v1/me/player",
 			method: "put",
-			body: {
-				device_ids: [device_ids_body]
-			},
+			body: JSON.stringify({ device_ids: [device_ids_body] }),
 			headers: {
 				Authorization: `Bearer ${access_token}`
 			}

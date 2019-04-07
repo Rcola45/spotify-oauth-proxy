@@ -101,4 +101,24 @@ app.get("/refresh", (req, res) => {
 	);
 });
 
+app.get("/transferToPlayer", (req, res) => {
+	const access_token = req.query.token;
+	const device_ids_body = req.query.device_id
+	request(
+		{
+			url: "https://api.spotify.com/v1/me/player",
+			method: "put",
+			form: {
+				device_ids: [device_ids_body]
+			},
+			headers: {
+				Authorization: `Bearer ${access_token}`
+			}
+		},
+		(err, response, body) => {
+			res.send(body);
+		}
+	);
+});
+
 app.listen(process.env.PORT || "3400");
